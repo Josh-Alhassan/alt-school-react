@@ -1,10 +1,10 @@
 import React from 'react';
 import './style.css';
 
-function Car(props) {
+function Car({ brand, color }) {
   return (
     <div className="car">
-      {props.brand} {props.color}
+      {brand} {color}
     </div>
   );
 }
