@@ -14,7 +14,9 @@ function Car({ data }) {
 }
 
 export default function App() {
+  // UseState()
   const [isLoading, setIsLoading] = useState(true);
+  const [count, setCount] = useState(0);
 
   // Set time out to simulate data loading...
   setTimeout(() => {
@@ -46,8 +48,15 @@ export default function App() {
     <div>
       <h1>Altschool React Practice!</h1>
       <div> {listOfCars} </div>
-      <div>
+      {/* Conditional Rendering */}
+      <div className="conditional-rendering">
         {isLoading ? <Loader /> : <Content />}
+      </div>
+
+      {/* ReactHooks - UseState */}
+      <div>
+        <h2> Count: {count}</h2>
+        <button onClick={() => setCount(count + 1)} >Increment</button>
       </div>
     </div>
   );
