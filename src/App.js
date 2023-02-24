@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 import Content from './Conditional/Content';
@@ -17,6 +17,14 @@ export default function App() {
   // UseState()
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0);
+
+  // UseEffect
+  useEffect(() => {
+    // Do Something
+    if (count > 0) {
+      console.log('Count: ' + count);
+    }
+  }, [count]);
 
   // Set time out to simulate data loading...
   setTimeout(() => {
@@ -56,7 +64,7 @@ export default function App() {
       {/* ReactHooks - UseState */}
       <div>
         <h2> Count: {count}</h2>
-        <button onClick={() => setCount(count + 1)} >Increment</button>
+        <button onClick={() => setCount(count + 1)}>Increment</button>
       </div>
     </div>
   );
