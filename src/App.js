@@ -17,6 +17,7 @@ export default function App() {
   // UseState()
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0);
+  const [car, setCar] = useState('Volvo');
 
   // UseEffect
   useEffect(() => {
@@ -52,6 +53,14 @@ export default function App() {
   const listOfCars = cars.map((car) => {
     return <Car key={Math.floor(Math.random())} data={car} />;
   });
+
+  const handleCarClick = () => {
+    setCar('Honda')
+  };
+
+  const handleDecrement = () => {
+    setCount((prevCount) => prevCount - 1)
+  }
   return (
     <div>
       <h1>Altschool React Practice!</h1>
@@ -65,6 +74,9 @@ export default function App() {
       <div>
         <h2> Count: {count}</h2>
         <button onClick={() => setCount(count + 1)}>Increment</button>
+        <button onClick={handleDecrement} >Decrement</button>
+        <p>I am a {car}</p>
+        <button onClick={handleCarClick} >Change Car</button>
       </div>
     </div>
   );
