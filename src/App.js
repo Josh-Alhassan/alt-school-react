@@ -3,6 +3,9 @@ import './style.css';
 
 import Content from './Conditional/Content';
 import Loader from './Conditional/Loader';
+// import UserProfile from './UseContext/UserProfile';
+// import UserBio from './UseContext/UserBio';
+// import AuthProvider from './UseContext/AuthProvider';
 
 // UseContext
 // Create a context for our App
@@ -15,45 +18,63 @@ const AuthContext = createContext({
   verified: false,
 });
 
-// Define Context
+// Define Context Provider
 function AuthProvider(props) {
+  const [user, setUser] = useState({
+    username: "Obama",
+    name: "Barrack Obama",
+    email: "obama@gmail.com",
+    bio: "Barrack Obama is the 47th president of the United States of America",
+  })
+
   return (
     <AuthContext.Provider
-      value = {
-        user= {
-          username: "joshua",
-          name: "Joshu Abek",
-          email: "Joshua@gmail.com",
-        }
-      }
+      value = {{
+        user: user,
+        varified: true,
+        setUser: setUser,
+      }}
     >
       {props.children}
     </AuthContext.Provider>
   )
 }
 
-function Userbio() {
+// UserDefined Component
+function UserBio() {
+  const [user, setUser] = useContext(AuthContext);
+
+  // Update the user's bio on click
+  const handleBioUpdate = (event) => {
+    event.preventDefault();
+    setUser((prev) => {
+      return {
+        ...prev,
+        bio: "Barrack Obama wwas born in Honolulu in Malawi, and is the former President of the United States of America",
+      };
+    });
+  };
+
   return (
     <div>
-      <h1>User Bio</h1>
-      <div>
-        Barrack Obama is the 44th and current President of the United State of America.
-      </div>
+      <h1>User Profile</h1>
+      <div>{user.bio} </div>
+      <button onClick={handleBioUpdate}> Update Bio </button>
     </div>
   )
 }
 
-function UserProfile () {
+// Userprofile Component
+function UserProfile() {
   const {user, verified} = useContext(AuthContext);
 
   return (
     <div>
-      <h1> User Profile </h1>
-      <div>username: {user.username}</div>
-      <div>Name: {user.name}</div>
-      <div>Email: {user} </div>
-      <div>{verified ? "Yes" : "No"}</div>
-      <Userbio />
+      <h1>Username: {user.username} </h1>
+      <div>Name: {user.name} </div>
+      <div>Email: {user.email} </div>
+      <div>Verified: {verified ? "Yes" : "No"} </div>
+      <UserBio />
     </div>
   )
 }
@@ -133,7 +154,13 @@ export default function App() {
         <button onClick={handleCarClick} >Change Car</button>
       </div>
 
-      < Userbio />
+      <AuthProvider>
+        <section>
+          <UserProfile />
+        </section>
+      </AuthProvider>
     </div>
   );
 }
+
+export default App;
