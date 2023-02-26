@@ -3,9 +3,6 @@ import './style.css';
 
 import Content from './Conditional/Content';
 import Loader from './Conditional/Loader';
-// import UserProfile from './UseContext/UserProfile';
-// import UserBio from './UseContext/UserBio';
-// import AuthProvider from './UseContext/AuthProvider';
 
 // UseContext
 // Create a context for our App
@@ -64,20 +61,6 @@ function UserBio() {
   )
 }
 
-// Userprofile Component
-function UserProfile() {
-  const {user, verified} = useContext(AuthContext);
-
-  return (
-    <div>
-      <h1>Username: {user.username} </h1>
-      <div>Name: {user.name} </div>
-      <div>Email: {user.email} </div>
-      <div>Verified: {verified ? "Yes" : "No"} </div>
-      <UserBio />
-    </div>
-  )
-}
 
 function Car({ data }) {
   // const { data.brand, data.color, data.year } = data;
@@ -86,6 +69,22 @@ function Car({ data }) {
       {data.year}, {data.color}, {data.brand}
     </div>
   );
+}
+
+// Userprofile Component
+function UserProfile() {
+  const {user, verified} = useContext(AuthContext);
+
+  return (
+    <div>
+      <h1>User Profiles</h1>
+      <div>Username: {user.username} </div>
+      <div>Name: {user.name} </div>
+      <div>Email: {user.email} </div>
+      <div>Verified: {verified ? "Yes" : "No"} </div>
+      <UserBio />
+    </div>
+  )
 }
 
 export default function App() {
@@ -139,7 +138,7 @@ export default function App() {
   return (
     <div>
       <h1>Altschool React Practice!</h1>
-      <div> {listOfCars} </div>
+      <div> {listOfCars} </div> 
       {/* Conditional Rendering */}
       <div className="conditional-rendering">
         {isLoading ? <Loader /> : <Content />}
@@ -155,7 +154,7 @@ export default function App() {
       </div>
 
       <AuthProvider>
-        <section>
+        <section className="main-container">
           <UserProfile />
         </section>
       </AuthProvider>
